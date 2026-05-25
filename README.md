@@ -193,7 +193,6 @@ import lombok.Data;
 public class Student {
 
     @Id
-//    @GeneratedValue
     private Long id;
 
     private String name;
@@ -248,29 +247,18 @@ import java.util.List;
 @RestController
 public class StudentController {
 
-//    @Autowired
-//    StudentRepository repo;
-
     private final StudentService service;
 
     public StudentController(StudentService service) {
         this.service = service;
     }
-
-    // Save Data
     @PostMapping("/save")
     public Student saveStudent(
             @RequestBody Student s) {
-
-//        return repo.save(s);
         return service.saveStudent(s);
     }
-
-    // Get All Data
     @GetMapping("/all")
     public List<Student> getAll() {
-
-//        return repo.findAll();
         return service.getAllStudents();
     }
 
@@ -278,29 +266,12 @@ public class StudentController {
     public Student updateStudent(
             @PathVariable Long id,
             @RequestBody Student s) {
-
-//    Student data = repo.findById(id).orElse(null);
-//
-//    if (data != null) {
-//        data.setName(s.getName());
-//        data.setId(s.getId());
-//        data.setDept(s.getDept());
-//        return repo.save(data);
-//    }
-//    return null;
-//    throw new RuntimeException("Student not found");
-//        return ResponseEntity.notFound().build();
         return service.updateStudent(id,s);
     }
 
     // DELETE - Delete
     @DeleteMapping("/{id}")
     public String deleteStudent(@PathVariable Long id) {
-
-//    repo.deleteById(id);
-
-
-//    return "Deleted Successfully";
         return service.deleteStudent(id);
     }
 }
